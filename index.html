@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+    <form action="/profile" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" />
+        <button>upload</button>
+      </form>
+      <br><br>
+      <input id="fileHash" type="text">
+      
+      <button onclick="submitRes()">submit</button>
+      <br>
+      <button onclick="loadDoc()">download</button>
+      
+    </div>
+</body>
+
+    <script>
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                // document.getElementById("demo").innerHTML = this.responseText;
+                 console.log(xhttp);
+                window.open(xhttp.responseURL);
+               
+                }
+            };
+            console.log(document.getElementById("fileHash").value)
+            var url="download/"+document.getElementById("fileHash").value;
+           // xhttp.open("GET", "download/"+document.getElementById("fileHash").value, true);
+           
+           xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+    </script>
+
+    <script>
+        function submitRes() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                // document.getElementById("demo").innerHTML = this.responseText;
+                 console.log(xhttp);
+                window.open(xhttp.responseURL);
+                //var val = this.respURL
+                //val=JSON.parse(val)
+               //val.blockHash
+                }
+            };
+            console.log(document.getElementById("fileHash").value)
+            var url="send/"+document.getElementById("fileHash").value;
+          
+           
+           xhttp.open("POST", url, true);
+            xhttp.send();
+        }
+    </script>
+</html>
